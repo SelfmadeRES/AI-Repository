@@ -8,6 +8,9 @@ def stringComparison(string1, string2):
         string1index = string1.index(i)
         if i != string2[string1index]:
             return string1.index(i)
+            break
+    return "De twee strings zijn identiek"
 
 
-stringComparison("Ik houd van taco's", "Ik houd niet van hamburgers")
+
+print(stringComparison("Ik houd van taco's", "Ik houd van taco's"))
