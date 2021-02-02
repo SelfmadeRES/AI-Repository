@@ -13,5 +13,4 @@ def sortNumbers(list):
 
     return list
 
-print(sortNumbers([20, 18, 41, 85, 7, 8
-                   ]))
+print(sortNumbers([20, 18, 41, 85, 7, 8]))
