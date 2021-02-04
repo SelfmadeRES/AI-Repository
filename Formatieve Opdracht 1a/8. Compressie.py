@@ -14,15 +14,14 @@ def compress():
         lines = f.readlines()
     with open("compressed.txt", "w") as f:
         for line in lines:
-            for char in line:
-                if char == " ":
-                    char.replace(char, "")
-            line.replace("\n", "")
-            line.replace("\t", "")
+            line = line.replace(" ", "")
+            line = line.replace("\n", "")
+            line = line.replace("\t", "")
             print(line)
             f.write(line)
     f.close()
 
 compress()
+
 
 
