@@ -10,7 +10,7 @@ def caesar():
         if char in charlist:
             char = charlist[(charlist.index(char) + rotatie)]
             changed += char
-            print(char)
+            #print(char)
     return changed
 
 
