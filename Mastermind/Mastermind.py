@@ -23,23 +23,29 @@ def codezetten():  #Deze functie zal worden aangeroepen als de speler kiest voor
     return code
 
 def raadbot(beurt, feedback):
-    letters = ["R", "O", "Y", "G", "B", "P"]
+    unchanged = ["R", "O", "Y", "G", "B", "P"]
+    lettersleft = ["R", "O", "Y", "G", "B", "P"]
     gok = []
     if beurt == 1:
+        for i in range(2):
+            gokletter = random.choice(lettersleft)
+            gok.append(gokletter)
+            gok.append(gokletter)
+            lettersleft.remove(gokletter)
+    elif feedback == [] and beurt == 2:
         for i in range(2):
             gokletter = random.choice(letters)
             gok.append(gokletter)
             gok.append(gokletter)
-            letters.remove(gokletter)
-        freshletters = ["R", "O", "Y", "G", "B", "P"]
-    elif feedback == []:
+            lettersleft.remove(gokletter)
+    elif feedback == [] and beurt == 3:
         for i in range(2):
-            gokletter = random.choice(letters2)
+            gokletter = random.choice(letters)
             gok.append(gokletter)
             gok.append(gokletter)
-            letters.remove(gokletter)
-        letters3 = ["R", "O", "Y", "G", "B", "P"]
-    print(gok, [])
+    
+    return gok
+    #print(gok, [])
 
 raadbot(1)
 def mainfunc():
