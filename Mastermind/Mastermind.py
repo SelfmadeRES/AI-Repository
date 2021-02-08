@@ -25,25 +25,32 @@ def codezetten():  #Deze functie zal worden aangeroepen als de speler kiest voor
 def raadbot(beurt, feedback):
     unchanged = ["R", "O", "Y", "G", "B", "P"]
     lettersleft = ["R", "O", "Y", "G", "B", "P"]
-    gok = []
+    ######start######
     if beurt == 1:
+        gok = []
         for i in range(2):
             gokletter = random.choice(lettersleft)
             gok.append(gokletter)
             gok.append(gokletter)
             lettersleft.remove(gokletter)
     elif feedback == [] and beurt == 2:
+        gok = []
         for i in range(2):
             gokletter = random.choice(letters)
             gok.append(gokletter)
             gok.append(gokletter)
             lettersleft.remove(gokletter)
     elif feedback == [] and beurt == 3:
+        gok = []
         for i in range(2):
             gokletter = random.choice(letters)
             gok.append(gokletter)
             gok.append(gokletter)
-    
+    #####verder######
+    reversedone = False
+    if gok.count("WHITE") >= 2:
+        gok.reverse()
+        reversedone = True
     return gok
     #print(gok, [])
 
