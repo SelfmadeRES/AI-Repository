@@ -13,7 +13,7 @@ def spelkiezen():  #Deze functie laat de speler kiezen of hij wil raden of zette
         code = input("Wat is je code (R, O, Y, G, B, P): ")  #De toegestane kleuren zijn Red, Orange, Yellow, Green, BLue en Purple
         return code
 
-def codezetten():  #Deze functie zal worden aangeroepen als de speler
+def codezetten():  #Deze functie zal worden aangeroepen als de speler kiest voor raden. De functie genereert een random code.
     code = []
     codeletters = ["R", "O", "Y", "G", "B", "P"]
     for i in range(4):
@@ -25,13 +25,34 @@ def codezetten():  #Deze functie zal worden aangeroepen als de speler
 
 def mainfunc():
     spel = spelkiezen()
+    geraden = False
     if spel == "raden":
-        codezetten()
-
+        code = codezetten() #De code wordt de code die random is gekozen
+        pins = []   #Hier komen de pins die het antwoord geven
+        #print(code)
+        for i in range(1, 13):
+            print("Gok " + str(i) + ":")
+            guess = list(input("Raad de code: "))
+            for j in range(4):
+                if guess[j] == code[j]:
+                    pins.append("BLACK")
+                elif guess[j] in code:
+                    pins.append("WHITE")
+            pins.sort()
+            print(pins)
+            if pins == ["BLACK", "BLACK", "BLACK", "BLACK"]:
+                print("Gefeliciteerd! Je hebt de code geraden")
+                geraden = True
+                break
+            pins = []
+        if geraden == False:
+            print("Helaas, je gokken zijn op!")
+    else:
+        code = spel
 
 #spelkiezen()
-codezetten()
-
+#codezetten()
+mainfunc()
 
 
 
