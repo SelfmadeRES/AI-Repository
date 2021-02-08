@@ -22,7 +22,26 @@ def codezetten():  #Deze functie zal worden aangeroepen als de speler kiest voor
         code.append(codeletter)
     return code
 
+def raadbot(beurt, feedback):
+    letters = ["R", "O", "Y", "G", "B", "P"]
+    gok = []
+    if beurt == 1:
+        for i in range(2):
+            gokletter = random.choice(letters)
+            gok.append(gokletter)
+            gok.append(gokletter)
+            letters.remove(gokletter)
+        freshletters = ["R", "O", "Y", "G", "B", "P"]
+    elif feedback == []:
+        for i in range(2):
+            gokletter = random.choice(letters2)
+            gok.append(gokletter)
+            gok.append(gokletter)
+            letters.remove(gokletter)
+        letters3 = ["R", "O", "Y", "G", "B", "P"]
+    print(gok, [])
 
+raadbot(1)
 def mainfunc():
     spel = spelkiezen()
     geraden = False
@@ -42,7 +61,7 @@ def mainfunc():
             print(pins)
             if pins == ["BLACK", "BLACK", "BLACK", "BLACK"]:
                 print("Gefeliciteerd! Je hebt de code geraden")
-                geraden = True
+                geraden = True  #Zorgt er voor dat de "Helaas" line niet geprint wordt
                 break
             pins = []
         if geraden == False:
@@ -52,7 +71,7 @@ def mainfunc():
 
 #spelkiezen()
 #codezetten()
-mainfunc()
+#mainfunc()
 
 
 
