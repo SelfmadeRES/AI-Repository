@@ -1,4 +1,9 @@
 #mastermind
+#imports
+import random
+
+
+
 
 def spelkiezen():  #Deze functie laat de speler kiezen of hij wil raden of zetten. Als hij voor zetten kiest moet hij een code in formaat "CODE" kiezen
     spelsoort = input("Wil je raden of zetten: ")
@@ -8,10 +13,24 @@ def spelkiezen():  #Deze functie laat de speler kiezen of hij wil raden of zette
         code = input("Wat is je code (R, O, Y, G, B, P): ")  #De toegestane kleuren zijn Red, Orange, Yellow, Green, BLue en Purple
         return code
 
-def codezetten():
-    
+def codezetten():  #Deze functie zal worden aangeroepen als de speler
+    code = []
+    codeletters = ["R", "O", "Y", "G", "B", "P"]
+    for i in range(4):
+        codegetal = random.randint(0, 5)
+        codeletter = codeletters[codegetal]
+        code.append(codeletter)
+    return code
+
+
 def mainfunc():
     spel = spelkiezen()
+    if spel == "raden":
+        codezetten()
+
+
+#spelkiezen()
+codezetten()
 
 
 
@@ -24,12 +43,7 @@ def mainfunc():
 
 
 
-
-
-
-
-
-#print("""________________________
+print("""________________________
 |------C  O  D  E------|
 |----------------------|
 |12**--_  _  _  _------|
