@@ -2,7 +2,7 @@
 #imports
 import random
 import copy
-
+import itertools
 
 
 def spelkiezen():  #Deze functie laat de speler kiezen of hij wil raden of zetten. Als hij voor zetten kiest moet hij een code in formaat "CODE" kiezen
@@ -10,8 +10,12 @@ def spelkiezen():  #Deze functie laat de speler kiezen of hij wil raden of zette
     if spelsoort == "raden":
         return spelsoort
     elif spelsoort == "zetten":
-        code = input("Wat is je code (R, O, Y, G, B, P): ")  #De toegestane kleuren zijn Red, Orange, Yellow, Green, BLue en Purple
+        code = list(input("Wat is je code (R, O, Y, G, B, P): "))  #De toegestane kleuren zijn Red, Orange, Yellow, Green, BLue en Purple
         return code
+    else:
+        print("incorrect input, run opnieuw")
+        exit()
+
 
 def codezetten():  #Deze functie zal worden aangeroepen als de speler kiest voor raden. De functie genereert een random code.
     code = []
@@ -55,52 +59,65 @@ def raadbot(beurt, feedback):
     #print(gok, [])
 
 #raadbot(1)
+
+def createPossibleCodes(colors, positions: int):
+    listOfCombs = []
+    for p in itertools.product(colors, repeat=positions): #itertools.product pakt alle mogelijkheden. https://stackoverflow.com/questions/14006867/python-itertools-permutations-how-to-include-repeating-characters
+        listOfCombs.append(list(p))
+    return listOfCombs
+
+
+def codeControleren(code, guess):
+    pins = []
+    changedcode = code.copy()
+    changedguess = guess.copy()
+    j = 0
+    for c in guess:
+        if c == code[j]:
+            pins.append("BLACK")
+            changedcode.remove(c)
+            changedguess.remove(c)
+        j += 1
+    for d in changedguess:
+        if d in changedcode:
+            pins.append("WHITE")
+            changedcode.remove(d)
+    pins.sort()
+    if pins == ["BLACK", "BLACK", "BLACK", "BLACK"]:
+        return "done"
+    else:
+        return pins
+
+def pickGuess(combs):
+    guess = random.choice(combs)
+    return guess
+
+
+
+
+
 def mainfunc():
     spel = spelkiezen()
     geraden = False
     if spel == "raden":
         code = codezetten() #De code wordt de code die random is gekozen
         pins = []   #Hier komen de pins die het antwoord geven
-        print(code)
         for i in range(1, 13):
             changedcode = code.copy()
             print("Gok " + str(i) + ":")
             guess = list(input("Raad de code: "))
-            print(guess)
-            print(code)
-            print("ABC", changedcode)
+            changedguess = guess.copy()
             j = 0
-            while j < 4:
-                print(j)
-                print(guess)
-                print(changedcode)
-                if guess[j] == code[j]:
-                    pins.append("BLACK")
-                    changedcode.pop(j)
-                elif guess[j] in changedcode:
-                    pins.append("WHITE")
-                    changedcode.remove(guess[j])
-                j += 1
-            """for c in guess:
-                print(c)
-                print(code)
-                print(changedcode)
-                if c == code[guess.index(c)]:
+            for c in guess:
+                if c == code[j]:
                     pins.append("BLACK")
                     changedcode.remove(c)
-                    print(changedcode)"""
-
-            """for d in guess:
+                    changedguess.remove(c)
+                j += 1
+            for d in changedguess:
                 if d in changedcode:
                     pins.append("WHITE")
                     changedcode.remove(d)
-                    print(changedcode)"""
-
-
-            """if guess[j] == code[j]:
-                pins.append("BLACK")
-            elif guess[j] in code:
-                pins.append("WHITE")"""
             pins.sort()
             print(pins)
             if pins == ["BLACK", "BLACK", "BLACK", "BLACK"]:
@@ -112,7 +129,39 @@ def mainfunc():
             print("Helaas, je gokken zijn op!")
     else:
         code = spel
-        ###CODE VOOR DE BOT
+        geraden = False
+        possCombs = createPossibleCodes(["R", "O", "G", "Y", "P", "B"], 4)
+        guesses = 1
+        while geraden == False:
+            nextGuess = list(pickGuess(possCombs))
+            possCombs.remove(nextGuess)
+            answer = codeControleren(code, nextGuess)
+            if len(answer) == 0:                        #Deze if-statement zorgt ervoor dat als de laatste guess 0 kleuren goed had, deze kleuren niet meer worden gebruikt
+                colorsNotInAnswer = []
+                for letter in nextGuess:
+                    if letter not in colorsNotInAnswer:
+                        colorsNotInAnswer.append(letter)
+                for color in colorsNotInAnswer:
+                    for comb in possCombs:
+                        if color in comb:
+                            possCombs.remove(comb)
+            if answer != "done" and len(answer) == 4:   #Deze if-statement zorgt ervoor dat als je 4 pins hebt, en dus alle kleuren weet de bot alleen nog opties probeert met die kleuren
+                colorsInCode = []
+                for letter in nextGuess:
+                    if letter not in colorsInCode:
+                        colorsInCode.append(letter)
+                colorsNotInCode = ["R", "O", "Y", "G", "B", "P"]
+                for color in colorsInCode:
+                    colorsNotInCode.remove(color)
+                for color in colorsNotInCode:
+                    for comb in possCombs:
+                        if color in comb:
+                            possCombs.remove(comb)
+
+            if answer == "done":
+                geraden = True
+                print("De bot heeft het geraden in " + str(guesses) + " gokken")
+            guesses += 1
 
 #spelkiezen()
 #codezetten()
@@ -128,42 +177,3 @@ mainfunc()
 
 
 
-print("""________________________
-|------C  O  D  E------|
-|----------------------|
-|12**--_  _  _  _------|
-|--**------------------|
-|----------------------|
-|11**--_  _  _  _------|
-|--**------------------|
-|----------------------|
-|10**--_  _  _  _------|
-|--**------------------|
-|----------------------|
-|9-**--_  _  _  _------|
-|--**------------------|
-|----------------------|
-|8-**--_  _  _  _------|
-|--**------------------|
-|----------------------|
-|7-**--_  _  _  _------|
-|--**------------------|
-|----------------------|
-|6-**--_  _  _  _------|
-|--**------------------|
-|----------------------|
-|5-**--_  _  _  _------|
-|--**------------------|
-|----------------------|
-|4-**--_  _  _  _------|
-|--**------------------|
-|----------------------|
-|3-**--_  _  _  _------|
-|--**------------------|
-|----------------------|
-|2-**--_  _  _  _------|
-|--**------------------|
-|----------------------|
-|1-**--_  _  _  _------|
-|--**------------------|
-|----------------------|""")
