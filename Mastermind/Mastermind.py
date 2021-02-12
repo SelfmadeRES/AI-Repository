@@ -1,7 +1,7 @@
 #mastermind
 #imports
 import random
-
+import copy
 
 
 
@@ -54,22 +54,53 @@ def raadbot(beurt, feedback):
     return gok
     #print(gok, [])
 
-raadbot(1)
+#raadbot(1)
 def mainfunc():
     spel = spelkiezen()
     geraden = False
     if spel == "raden":
         code = codezetten() #De code wordt de code die random is gekozen
         pins = []   #Hier komen de pins die het antwoord geven
-        #print(code)
+        print(code)
         for i in range(1, 13):
+            changedcode = code.copy()
             print("Gok " + str(i) + ":")
             guess = list(input("Raad de code: "))
-            for j in range(4):
+            print(guess)
+            print(code)
+            print("ABC", changedcode)
+            j = 0
+            while j < 4:
+                print(j)
+                print(guess)
+                print(changedcode)
                 if guess[j] == code[j]:
                     pins.append("BLACK")
-                elif guess[j] in code:
+                    changedcode.pop(j)
+                elif guess[j] in changedcode:
                     pins.append("WHITE")
+                    changedcode.remove(guess[j])
+                j += 1
+            """for c in guess:
+                print(c)
+                print(code)
+                print(changedcode)
+                if c == code[guess.index(c)]:
+                    pins.append("BLACK")
+                    changedcode.remove(c)
+                    print(changedcode)"""
+
+            """for d in guess:
+                if d in changedcode:
+                    pins.append("WHITE")
+                    changedcode.remove(d)
+                    print(changedcode)"""
+
+
+            """if guess[j] == code[j]:
+                pins.append("BLACK")
+            elif guess[j] in code:
+                pins.append("WHITE")"""
             pins.sort()
             print(pins)
             if pins == ["BLACK", "BLACK", "BLACK", "BLACK"]:
@@ -81,10 +112,11 @@ def mainfunc():
             print("Helaas, je gokken zijn op!")
     else:
         code = spel
+        ###CODE VOOR DE BOT
 
 #spelkiezen()
 #codezetten()
-#mainfunc()
+mainfunc()
 
 
 
