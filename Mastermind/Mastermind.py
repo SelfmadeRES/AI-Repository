@@ -13,7 +13,8 @@ import itertools
 #De pins die je terugkrijgt als je zelf speelt zijn BLACK (Een goede kleur op de juiste positie) en WHITE (Een goede kleur op de verkeerde positie)
 
 
-def spelkiezen():  #Deze functie laat de speler kiezen of hij wil raden of zetten. Als hij voor zetten kiest moet hij een code in formaat "CODE" kiezen
+def spelkiezen():
+    """Deze functie laat de speler kiezen of hij wil raden of zetten. Als hij voor zetten kiest moet hij een code in formaat "CODE" kiezen"""
     spelsoort = input("Wil je raden of zetten: ")
     if spelsoort == "raden":
         return spelsoort
@@ -26,6 +27,7 @@ def spelkiezen():  #Deze functie laat de speler kiezen of hij wil raden of zette
 
 
 def codezetten():  #Deze functie zal worden aangeroepen als de speler kiest voor raden. De functie genereert een random code.
+    """Deze functie zal worden aangeroepen als de speler kiest voor raden. De functie genereert een random code."""
     code = []
     codeletters = ["R", "O", "Y", "G", "B", "P"]
     for i in range(4):
@@ -36,13 +38,15 @@ def codezetten():  #Deze functie zal worden aangeroepen als de speler kiest voor
 
 
 def createPossibleCodes(colors, positions: int):
+    """Geef de kleuren en het aantal posities op in formaat 'ABCD' en int"""
     listOfCombs = []
     for p in itertools.product(colors, repeat=positions): #itertools.product pakt alle mogelijkheden. Bron: https://stackoverflow.com/questions/14006867/python-itertools-permutations-how-to-include-repeating-characters
         listOfCombs.append(list(p))
     return listOfCombs
 
 
-def codeControleren(code, guess):  #Deze functie controleert de gok van de bot en geeft een antwoord terug
+def codeControleren(code, guess):
+    """Deze functie controleert de gok van de bot en geeft een antwoord terug"""
     pins = []
     changedcode = code.copy()
     changedguess = guess.copy()
@@ -64,6 +68,7 @@ def codeControleren(code, guess):  #Deze functie controleert de gok van de bot e
         return pins
 
 def pickGuess(combs):
+    """Kiest combinatie uit de resterende mogelijkheden"""
     guess = random.choice(combs)
     return guess
 
@@ -71,7 +76,8 @@ def pickGuess(combs):
 
 
 
-def mainfunc():             #De Main Function. Alle kleinere functie komen hier samen
+def mainfunc():
+    """De Main Function. Alle kleinere functie komen hier samen"""
     spel = spelkiezen()
     geraden = False
     if spel == "raden":                     #########################################
