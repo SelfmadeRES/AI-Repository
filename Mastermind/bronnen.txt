@@ -1,3 +1,0 @@
-Bronnen:
-Bron: https://stackoverflow.com/questions/14006867/python-itertools-permutations-how-to-include-repeating-characters
-Dit is de functie die alle mogelijke combinaties maakt voor de bot om uit te kiezen

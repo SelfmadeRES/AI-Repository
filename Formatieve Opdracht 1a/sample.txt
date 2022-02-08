@@ -1,5 +1,0 @@
-Hello world
-I am learning python
-
-This is a hard exercise
-	But im hanging in there.
