@@ -12,3 +12,14 @@ def palindromeCheck(word):
     return palindrome
 
 print(palindromeCheck("Racecar"))
+
+#Ik kon geen library function vinden die het woord voor me omdraait
+
+def palindromeThree(word):              #Dit is de functie waar ik zelf het woord om draai
+    reversedWord = word[::-1]
+    palindome = False
+    if word == reversedWord:            #checkt de gelijkheid
+        palindome = True
+    return palindome
+
+print(palindromeThree("racecar"))
