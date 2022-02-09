@@ -10,14 +10,9 @@ def count(x, list):
 #b. Schrijf een functie die in een gegeven lijst het grootste verschil tussen twee op een volgende getallen bepaalt.
 
 def biggest_difference(list):
-    min = 99999999999999999999999999999
-    max = -99999999999999999999999999999
-    for char in list:
-        if char < min:
-            min = char
-        if char > max:
-            max = char
-    return abs(min - max)
+    for index in range(1, len(list)-1):         #loopt door de lijst heen
+        print(abs(list[index] - list[index-1])) #print het verschil tussen de geindexde waarde en die met index - 1
+    return
 
 #c. Schrijf een functie, die bepaalt of een gegeven lijst met alleen 1’en en 0’en aan de volgende eisen voldoet:
   #- Het aantal enen is groter dan aan het aantal nullen
@@ -36,5 +31,5 @@ def binary_check(list):
 
 
 print(count(3, [1, 12, 3, 5, 45, 8, 3, 56, 3, 3, 1, 5, 3]))
-print(biggest_difference([1, 12, 3, 5, 45, 8, 3, 56, 3, 3, 1, 5, 3]))
+(biggest_difference([1, 12, 3, 5, 45, 8, 3, 56, 3, 3, 1, 5, 3]))
 print(binary_check([0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1]))
