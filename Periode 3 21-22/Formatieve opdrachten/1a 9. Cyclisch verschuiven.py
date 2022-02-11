@@ -9,19 +9,19 @@
 import math
 
 def cyclic(ch, n):
-    asciiValue = ord(ch)
-    binaryValue = str(format(asciiValue, "b"))
+    asciiValue = ord(ch)                        #char omzetten in ascii-waarde
+    binaryValue = str(format(asciiValue, "b"))  #ascii-waarde omzetten in binaire waarde
     print(binaryValue)
     while len(binaryValue) < 8:
-        binaryValue = "0" + binaryValue
+        binaryValue = "0" + binaryValue         #binaire waarde 8 bits lang maken
     print(binaryValue)
     cycled = [0, 0, 0, 0, 0, 0, 0, 0]
     i = 0
-    while i < len(binaryValue):
+    while i < len(binaryValue):                 #waarden in nieuwe list veranderen in character bits
         cycled[(i + n) % 8] = binaryValue[i]
         i += 1
     endByte = ""
-    for bit in cycled:
+    for bit in cycled:                          #bit list veranderen in string
         endByte += str(bit)
     return endByte
 

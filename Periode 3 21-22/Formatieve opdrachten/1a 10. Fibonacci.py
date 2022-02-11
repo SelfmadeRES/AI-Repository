@@ -7,10 +7,10 @@
 #Implementeer een functie die fn uitrekent gegeven integer n. De functie moet recursief zijn.
 
 def fibo(n):
-    if n <= 1:
+    if n <= 1:                              #base case
         return n
     else:
-        return fibo(n - 1) + fibo(n - 2)
+        return fibo(n - 1) + fibo(n - 2)    #recursie
 
 print(fibo(12))
 
