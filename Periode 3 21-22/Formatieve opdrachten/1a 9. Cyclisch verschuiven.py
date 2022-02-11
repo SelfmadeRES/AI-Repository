@@ -10,11 +10,15 @@ import math
 
 def cyclic(ch, n):
     asciiValue = ord(ch)
-    binaryValue = bin(asciiValue)
-    cycled = [0, 0, 0, 0, 0, 0, 0, 0]       #list past nog niet aan
+    binaryValue = str(format(asciiValue, "b"))
+    print(binaryValue)
+    while len(binaryValue) < 8:
+        binaryValue = "0" + binaryValue
+    print(binaryValue)
+    cycled = [0, 0, 0, 0, 0, 0, 0, 0]
     i = 0
     while i < len(binaryValue):
-        cycled[(i + n) // 8] = binaryValue[i]
+        cycled[(i + n) % 8] = binaryValue[i]
         i += 1
     endByte = ""
     for bit in cycled:
