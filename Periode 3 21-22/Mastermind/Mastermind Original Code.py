@@ -1,7 +1,5 @@
 """Deze code is gebruikt als opzet voor de opdracht Mastermind
-Enkele aanpassingen moeten nog worden gemaakt aan de antwoorden die je krijgt, namelijk:
-Stel de correcte code is ABCD en de gok van de speler is AAAA, dan zal de Speler XOOO terugkrijgen. De code denkt namelijk dat de A ergens andere voorkomt,
-ook al is hier al een X voor gegeven.
+De code is geschreven voor de spelvorm waar een kleur 1x voor mag komen. Verschillende aantal kleuren is 2-20. Lengte van de code is 4-10.
 Bron: https://rosettacode.org/wiki/Mastermind#Python"""
 
 
